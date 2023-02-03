@@ -1,8 +1,5 @@
 import Post from '../models/post_m.js'
-
-
-
-
+import mongoose from 'mongoose'
 
 
 //Get All posts
@@ -16,11 +13,19 @@ export const getAllPosts = async (req, res) => {
 }
 
 
-
-
-
 //Get One post
 export const getOnePost = async (req, res) => {
+const objectId = req.params.id
+     if (mongoose.Types.ObjectId.isValid(objectId)) {
+         return res.status(200).json({error: `Id is valid ObjectId`})
+      } else {
+        return res.status(404).json({error: 'Post findes ikke...'});
+      }
+    /*
+    const validId = ObjectId.isValid(req.params.id)
+    if(!validId)
+        return res.status(404).json({error: "Sorry, invalid ID"})
+      */  
     try {
     const postById = await Post.findById(req.params.id)
     res.status(200).json(postById)
@@ -28,13 +33,6 @@ export const getOnePost = async (req, res) => {
     res.status(400).json({error: error.message})
 }
 }
-
-
-/*
-if (!postById) {
-    return res.status(400).json({error: error.message})
-}
-*/
 
 
 //Create post
@@ -50,7 +48,8 @@ export const createPost = async (req, res) => {
     
 
 
-
+    //Update One post
+//Delete One post
 
 
 
