@@ -1,31 +1,20 @@
 import express from 'express'
-import Post from '../models/post_m.js'
+import { createPost, getOnePost, getAllPosts } from '../controllers/post_c.js'
+
 
 
 const router = express.Router()
 
 
 //Get all posts
-router.get('/', (req, res) => {
-    res.json({mssg: "Get all posts"})
-})
+router.get('/', getAllPosts)
 
 
 //Get One post
-router.get('/:id', (req, res) => {
-    res.json({mssg: "Get One post"})
-})
+router.get('/:id', getOnePost)
 
 //Create post
-router.post('/', async (req, res) => {
-    const { title, author, content } = req.body
-    try {
-        const post = await Post.create({ title, author, content })
-        res.status(200).json(post)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
-})
+router.post('/', createPost)
 
 
 router.delete('/:id', (req, res) => {
