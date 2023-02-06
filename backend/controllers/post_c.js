@@ -16,24 +16,16 @@ export const getAllPosts = async (req, res) => {
 //Get One post
 export const getOnePost = async (req, res) => {
 const objectId = req.params.id
-     if (mongoose.Types.ObjectId.isValid(objectId)) {
-         return res.status(200).json({error: `Id is valid ObjectId`})
-      } else {
-        return res.status(404).json({error: 'Post findes ikke...'});
-      }
-    /*
-    const validId = ObjectId.isValid(req.params.id)
-    if(!validId)
-        return res.status(404).json({error: "Sorry, invalid ID"})
-      */  
-    try {
-    const postById = await Post.findById(req.params.id)
-    res.status(200).json(postById)
-} catch (error) {
-    res.status(400).json({error: error.message})
-}
-}
-
+    if (!mongoose.Types.ObjectId.isValid(objectId))
+        return res.status(404).json({error: 'Post findes ikke...'}) 
+      
+        try {
+          const postById = await Post.findById(objectId)
+          res.status(200).json(postById)
+        } catch (error) {
+            res.status(400).json({error: error.message})
+        }
+    }
 
 //Create post
 export const createPost = async (req, res) => {
