@@ -15,17 +15,19 @@ export const getAllPosts = async (req, res) => {
 
 //Get One post
 export const getOnePost = async (req, res) => {
-const objectId = req.params.id
-    if (!mongoose.Types.ObjectId.isValid(objectId))
-        return res.status(404).json({error: 'Post findes ikke...'}) 
+const id = req.params.id
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).json({error: 'Post findes med pågældende id findes ikke...'}) 
       
         try {
-          const postById = await Post.findById(objectId)
+          const postById = await Post.findById(id)
           res.status(200).json(postById)
         } catch (error) {
             res.status(400).json({error: error.message})
         }
     }
+
+
 
 //Create post
 export const createPost = async (req, res) => {
@@ -38,10 +40,28 @@ export const createPost = async (req, res) => {
     }}
     
     
+    //Delete One post
+
+export const deletePost = async (req, res) => {
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).json({error: 'Post med pågældende /"id/" ikke...'})
+
+    try {
+        const deletedPost = await Post.findByIdAndDelete({_id:id})
+    res.status(200).json(deletedPost)
+}
+catch(error) {
+    res.status(400).json({error: error.message})
+}
+}
+
+
+
+
 
 
     //Update One post
-//Delete One post
 
 
 

@@ -1,5 +1,5 @@
 import express from 'express'
-import { createPost, getOnePost, getAllPosts } from '../controllers/post_c.js'
+import { createPost, getOnePost, getAllPosts, deletePost } from '../controllers/post_c.js'
 
 
 
@@ -17,9 +17,7 @@ router.get('/:id', getOnePost)
 router.post('/', createPost)
 
 
-router.delete('/:id', (req, res) => {
-    res.json({mssg: "Posts has been deleted"})
-})
+router.delete('/:id', deletePost)
 
 router.patch('/:id', (req, res) => {
     res.json({mssg: " Post has been updated..."})
