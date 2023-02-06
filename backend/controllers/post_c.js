@@ -39,29 +39,23 @@ export const createPost = async (req, res) => {
         res.status(400).json({error: error.message})
     }}
     
-    
-    //Delete One post
 
+//Delete One post
 export const deletePost = async (req, res) => {
-    const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id))
+    if(!mongoose.Types.ObjectId.isValid(req.params.id))
     return res.status(404).json({error: 'Post med pågældende /"id/" ikke...'})
 
     try {
-        const deletedPost = await Post.findByIdAndDelete({_id:id})
+        const deletedPost = await Post.findByIdAndDelete(req.params.id)
     res.status(200).json(deletedPost)
-}
-catch(error) {
+    }
+    catch(error) {
     res.status(400).json({error: error.message})
-}
-}
+    }}
 
 
 
-
-
-
-    //Update One post
+//Update One post
 
 
 
