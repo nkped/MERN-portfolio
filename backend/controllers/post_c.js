@@ -56,7 +56,18 @@ export const deletePost = async (req, res) => {
 
 
 //Update One post
+export const updatePost = async (req, res) => {
+    if(!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).json({error: "Post med pågældende id findes ikke..."})
 
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body)
+        res.status(200).json(updatedPost)
+
+    } catch(error) {
+    res.status(400).json({error: error.message})
+    }
+}
 
 
 
