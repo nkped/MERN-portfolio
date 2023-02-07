@@ -56,6 +56,8 @@ export const deletePost = async (req, res) => {
 
 
 //Update One post
+//NB!! I Postman kræver UPDATE 2 x send reqs! Første gang returnes post i oprindelig forn, næste gang returnes post i updatet form.
+
 export const updatePost = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(req.params.id))
     return res.status(400).json({error: "Post med pågældende id findes ikke..."})
