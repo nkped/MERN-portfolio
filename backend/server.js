@@ -1,8 +1,9 @@
 
 import express from 'express'
-import dotenv from 'dotenv'
-import posts from './routes/posts_r.js'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+
+import posts from './routes/posts_r.js'
 
 
 dotenv.config()

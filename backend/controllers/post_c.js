@@ -17,7 +17,7 @@ export const getAllPosts = async (req, res) => {
 export const getOnePost = async (req, res) => {
 const id = req.params.id
     if (!mongoose.Types.ObjectId.isValid(id))
-        return res.status(404).json({error: 'Post findes med pågældende id findes ikke...'}) 
+        return res.status(404).json({error: 'Post med pågældende id findes ikke...'}) 
       
         try {
           const postById = await Post.findById(id)
