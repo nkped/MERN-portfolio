@@ -1,4 +1,4 @@
-
+import PostDetails from '../components/PostDetails.js'
 import { useEffect, useState } from "react"
 
 
@@ -13,22 +13,21 @@ const Home = () => {
             
             if(response.ok) {
                 setPost(json)
-                console.log('setpost called')
+                console.log('setPost called...')
             } 
         }
         fetchPost()
     }, [])
-    return <div className="home">
-
-        <h2>Hello homepage!...</h2>
-<div className="posts">
-{ post && post.map((post) => (
-   <p key={post._id}>{post.title}</p>
-))}
-</div>
-
-    </div>
-}
+    
+    return (<div className="home">
+        <div className="posts">
+            {post && post.map((post) => (
+        <PostDetails key={post._id} post={post} />
+        ))}
+        </div>
+        </div>
+)}
 
 
 export default Home
+
